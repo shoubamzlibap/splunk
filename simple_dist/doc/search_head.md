@@ -53,3 +53,7 @@ If you have a firewall running (true in CentOS 7 by default), open up a port for
 firewall-cmd --add-port=8000/tcp
 firewall-cmd --add-port=8000/tcp --permanent
 ```
+
+## Minimum Free Diskspace
+Should you search head complain about the minimum free disk space be too low, either increase disk space (obviouslyl :)), or if you know you just have small test boxes like I do, you can
+change the respective setting, as I [did for the indexers](./indexer.md#minimum-free-diskspace-for-a-small-test-environment)
