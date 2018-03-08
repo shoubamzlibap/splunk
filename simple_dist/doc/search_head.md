@@ -5,6 +5,13 @@ Here I describe the setup of the searchhead.
 ## Disable indexing
 
 Disable indexing on the search head, as described in the [splunk docs](http://docs.splunk.com/Documentation/Splunk/7.0.2/DistSearch/Forwardsearchheaddata):
+
+Create a local version of your `outputs.conf`:
+```
+cd /opt/splunk/etc/system`
+```
+Then edit `local/outputs.conf`:
+
 ```
 # Turn off indexing on the search head
 [indexAndForward]
@@ -20,7 +27,7 @@ server=10.23.23.5:9997,10.23.23.6:9997
 ```
 
 ## Configure search peers
-Indexers are called "search peers", as they to the actual searching for the search head. 
+Indexers are called "search peers", as they do the actual searching for the search head. 
 Search peers are added to the search head by editing or creating 
 `$SPLUN_HOME/etc/system/local/distsearch.conf`:
 ```
