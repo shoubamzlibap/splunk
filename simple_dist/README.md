@@ -6,3 +6,5 @@ Disclaimer: This is not meant for production, I am not nessesarly following best
 [Preface](./doc/preface.md)
 
 [Search Head](./doc/search_head.md)
+
+[Indexer](./doc/indexer.md)

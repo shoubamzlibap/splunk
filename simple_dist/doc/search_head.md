@@ -46,3 +46,10 @@ The `<searchhead_name>` is the search head's serverName, specified in `server.co
 
 Restart each search peer. 
 
+
+## Open Firewall port
+If you have a firewall running (true in CentOS 7 by default), open up a port for the http interface (or https, if you have it configured):
+```
+firewall-cmd --add-port=8000/tcp
+firewall-cmd --add-port=8000/tcp --permanent
+```
