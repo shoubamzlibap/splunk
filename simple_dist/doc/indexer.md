@@ -1,6 +1,25 @@
 # Indexer
 
 ## Disable Web
+Usually the indexers don't need a webinterface, so its good practise to disable it. On both of the indexers, in `etc/system/local`, create a file called `web.conf` with the following content:
+```
+[settings]
+startwebserver = 0
+```
+
+After the change, restart splunk. If you want to test if this was successful, the following command should yield no output:
+```
+ss -tulpen |grep 8000
+```
+whereas bevor it should have printed a line.
+
+## Listen for tcp input
+Make your indexer listen for tcp input on port 9997. On the indexers, in `etc/system/local/inputs.conf`, add the following two lines:
+
+```
+[splunktcp:9997]
+disabled = 0 
+```
 
 ## Open Firewall port
 If you have a firewall running (true in CentOS 7 by default), open up the following ports
