@@ -37,7 +37,7 @@ Search peer idx1 has the following message: Disk Monitor: The index processor ha
 ```
 
 My "solution" is to change the `minFreeSpace` value in `etc/system/local/server.conf` to something below 5GB. I currently do not know, but there is probablyl a reason for this limit, so bevor 
-you do this on production I highly recommend you really know what you do. After all, what is 5GB in production? For my laptops ssd is a bunch, so I am setting this:
+you do this on production I highly recommend you really know what you do. After all, what is 5GB in production? For my laptop's ssd its a bunch, so I am setting this:
 ```
 [diskUsage]
 minFreeSpace = 1000
