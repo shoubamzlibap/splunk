@@ -43,3 +43,22 @@ you do this on production I highly recommend you really know what you do. After 
 minFreeSpace = 1000
 ```
 
+## Create an index
+For data that will be onboarded, we need to create an index. On both indexers, I created `etc/system/local/indexes.conf`:
+
+```
+[weblogs]
+disabled = 0
+homePath = $SPLUNK_DB/$_index_name/db
+coldPath = $SPLUNK_DB/$_index_name/colddb
+thawedPath = $SPLUNK_DB/weblogs/thaweddb
+maxTotalDataSizeMB = 1000
+
+```
+
+## change password?
+The [splunk docs](https://docs.splunk.com/Documentation/Splunk/7.0.2/DistSearch/Configuredistributedsearch) mention that you must change the password on the indexers, otherwise auth cannot work.
+So, here we go:
+```
+splunk edit user admin -password xxxxx  -auth admin:changeme
+```
