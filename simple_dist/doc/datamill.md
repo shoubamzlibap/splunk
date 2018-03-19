@@ -73,7 +73,7 @@ cd /opt/splunkforwarder/bin
 To be added.
 
 ## Connect the forwarder to the indexers
-Create a `outputs.conf` similar to the one on the searhead:
+Create a `etc/system/local/outputs.conf` similar to the one on the searhead:
 ```
 [tcpout]
 defaultGroup = my_search_peers 
