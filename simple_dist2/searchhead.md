@@ -52,3 +52,24 @@ you do this on production I highly recommend you really know what you do. After 
 minFreeSpace = 1000
 ```
 
+## Search peers
+Configure the search peers like this:
+```
+mkdir -p etc/apps/ia_searchpeers/default
+cat >>etc/apps/ia_searchpeers/default/distsearch.conf<<EOF
+[distributedSearch]
+servers = https://10.23.23.5:8089,https://10.23.23.6:8089
+EOF
+```
+
+## Distribute the key files
+This section is copied verbatim from the [splunk docs](http://docs.splunk.com/Documentation/Splunk/7.0.2/DistSearch/Configuredistributedsearch)
+
+If you add search peers via Splunk Web or the CLI, Splunk Enterprise automatically configures authentication. However, if you add peers by editing `distsearch.conf`, you must distribute the key files manually. After adding the search peers and restarting the search head, as described above:
+
+Copy the file `$SPLUNK_HOME/etc/auth/distServerKeys/trusted.pem` from the search head to `$SPLUNK_HOME/etc/auth/distServerKeys/<searchhead_name>/trusted.pem` on each search peer.
+
+The `<searchhead_name>` is the search head's serverName, specified in `server.conf`.
+
+Restart each search peer. 
+
