@@ -1,0 +1,54 @@
+# Search Head installation
+I have installed the search head (and the indexers) with the script [install_splunk.sh](./install_splunk.sh).
+It untars the splunk tarball, moves it to the right location (`/opt/splunk`), accepts the license and enables
+start at boot.
+
+If desired, a non-default hostname can be set in `etc/system/local/server.conf` with the following parameter:
+```
+[general]
+serverName = theSearchHead
+```
+
+## Open Firewall port
+If you have a firewall running (true in CentOS 7 by default), open up a port for the http interface (or https, if you have it configured):
+```
+# web interface
+firewall-cmd --add-port=8000/tcp
+firewall-cmd --add-port=8000/tcp --permanent
+# splunkd, needed for forwarder management
+firewall-cmd --add-port=8089/tcp
+firewall-cmd --add-port=8089/tcp --permanent
+```
+
+## Disable indexing
+
+Disable indexing on the search head, as described in the [splunk docs](http://docs.splunk.com/Documentation/Splunk/7.0.2/DistSearch/Forwardsearchh
+eaddata):
+
+Create the file `/opt/splunk/etc/system/local/outputs.conf`:
+
+```
+# Turn off indexing on the search head
+[indexAndForward]
+index = false
+ 
+[tcpout]
+defaultGroup = my_search_peers 
+forwardedindex.filter.disable = true  
+indexAndForward = false 
+ 
+[tcpout:my_search_peers]
+server=10.23.23.5:9997,10.23.23.6:9997
+```
+
+## Minimum Free diskspace - just for test setups:
+This is a setting that will probably not bug you in production, but my test boxes are rather small, with a root fs of just 8GB. Soon your splunk box will complain.
+
+My "solution" is to change the `minFreeSpace` value in `etc/system/local/server.conf` to something below 5GB. I currently do not know, but there is probablyl a reason for this limit, so bevor 
+you do this on production I highly recommend you really know what you do. After all, what is 5GB in production? For my laptop's ssd its a bunch, so I am setting this:
+
+```
+[diskUsage]
+minFreeSpace = 1000
+```
+
