@@ -1,0 +1,12 @@
+samples:  
+- name: securelog 
+  generator: replay
+
+  tokens:
+  - name: ts1
+    type: timestamp
+    format: regex
+    token: (\w{3}\s{1,2}\d{1,2}\s{1}\d{2}:\d{2}:\d{2})
+    replacement: '%b %d %H:%M:%S'
+  fromSample: secure2.csv
+

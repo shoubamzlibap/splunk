@@ -36,19 +36,10 @@ chown -R splunk:splunk /opt/log/
 
 On both datamills create /opt/datagen and download [gogen](https://github.com/coccyx/gogen) to this directory.
 
-As *splunk*, execute the following command to get some sample weblogs:
+As *splunk*, on datamill1, execute the following command to get some sample weblogs:
 ```
 mkdir gogens
 ./gogen pull coccyx/weblog gogens
 ```
-
-The following script can generate three weblogs at once:
-```
-#!/bin/bash
-trap 'kill $(jobs -p)' SIGINT
-# web logs
-for i in 1 2 3; do
-    ./gogen -c gogens/weblog.yml -o file -f /opt/log/www${i}/access.log gen -r -c 1 -i 10 &
-done
-wait
-```
+Also, deploy the directory [mygogens](./mygogens) with its content, then run [./create_logs1.sh](./create_logs1.sh).
+It will run and generate logs untill you kill it with Ctrl + C.

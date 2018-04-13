@@ -1,0 +1,16 @@
+"_raw"
+Mar 17 04:05:06 www3 sshd[8279]: Accepted publickey for bobby from 10.10.10.23 port 38424 ssh2
+Mar 17 04:05:06 www3 sshd[8279]: pam_unix(sshd:session): session opened for user bobby by (uid=0)
+Mar 17 04:05:06 www3 sshd[8282]: Received disconnect from 10.10.10.23: 11: disconnected by user
+Mar 17 04:05:06 www3 sshd[8279]: pam_unix(sshd:session): session closed for user bobby
+Mar 17 04:05:11 www3 sshd[8276]: Accepted publickey for bobby from 10.10.10.24 port 38400 ssh2
+Mar 17 04:05:11 www3 sshd[8276]: pam_unix(sshd:session): session opened for user alice by (uid=0)
+Mar 17 04:05:11 www3 sshd[8302]: Received disconnect from 10.10.10.24: 11: disconnected by user
+Mar 17 04:05:11 www3 sshd[8276]: pam_unix(sshd:session): session closed for user alice
+Mar 17 04:05:21 www3 sshd[8278]: Accepted publickey for alice from 10.10.10.25 port 38422 ssh2
+Mar 17 04:05:21 www3 sshd[8278]: pam_unix(sshd:session): session opened for user alice by (uid=0)
+Mar 17 04:05:21 www3 sshd[8304]: Received disconnect from 10.10.10.25: 11: disconnected by user
+Mar 17 04:05:21 www3 sshd[8278]: pam_unix(sshd:session): session closed for user alice
+Mar 17 04:08:13 www3 sudo:   nagios: TTY=unknown ; PWD=/ ; USER=root ; COMMAND=/usr/local/nagios/libexec/nrpe_local/check_logfiles -f /usr/local/nagios/etc/check_logfiles.cfg --configdir /usr/local/nagios/etc/check_logfiles.d --searches puppet -t 120
+Mar 17 04:08:55 www3 sudo:   nagios : TTY=unknown ; PWD=/ ; USER=root ; COMMAND=/usr/local/nagios/libexec/nrpe_local/check_logfiles -f /usr/local/nagios/etc/check_logfiles.cfg --configdir /usr/local/nagios/etc/check_logfiles.d --searches syslog -t 120
+
