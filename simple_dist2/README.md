@@ -23,6 +23,7 @@ To actually try out things I had five virtual boxes with centos 7.4 installed:
 The current splunk version as of this writing is 7.0.2, but things should also work with older and newer versions.
 
 For details, see the following links:
+
 [Set up the searchhead](./searchhead.md)
 
 [Set up the indexer](./indexer.md)

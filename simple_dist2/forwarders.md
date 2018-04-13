@@ -43,3 +43,19 @@ mkdir gogens
 ```
 Also, deploy the directory [mygogens](./mygogens) with its content, then run [./create_logs1.sh](./create_logs1.sh).
 It will run and generate logs untill you kill it with Ctrl + C.
+
+## Forwarder management
+Once the logs are generated, we can start using forwarder management to configure the forwarders. Depending on the overall architecture, the 
+forwarder management can happen on a dedicated splunk server. In the case of my little demo setup, I will use the searchhead as a forwarder manager. So, the serachhead must be up and running.
+
+On the searchhead, create a directory for each forwarder, as in our little demo setup, each forwarder will get its own forwarding app.
+Each directory will hold an app that will be deployed. Also, reload the deployment server: 
+
+```
+cd /opt/splunk/etc/deployment-apps
+mkdir dm1_fw_app dm2_fw_app
+splunk reload deploy-server
+```
+
+On the splunk web on the search head, go to "Settings", "Forwarder Management". You should see two classes corresponding to the directories just created.
+Under "Server Classes", create a new server class, e.g. called "web", and add the app "datamill1" and the server "datamill1" to the class.

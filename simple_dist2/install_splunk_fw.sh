@@ -15,7 +15,7 @@ cd ${splunk_home}/bin
 ./splunk enable boot-start -user splunk --accept-license
 
 # create deploymentclients.conf:
-conf_file=${splunk_home}/etc/system/local/deploymentclients.conf
+conf_file=${splunk_home}/etc/system/local/deploymentclient.conf
 cat >>${conf_file}<<EOF
 [deployment-client]
 
