@@ -59,3 +59,44 @@ splunk reload deploy-server
 
 On the splunk web on the search head, go to "Settings", "Forwarder Management". You should see two classes corresponding to the directories just created.
 Under "Server Classes", create a new server class, e.g. called "web", and add the app "datamill1" and the server "datamill1" to the class.
+
+### Forwarding web and secure logs
+In the `dm`_fw_app` directory, create a `local` subdirectory, with the following two files in it:
+
+```
+# inputs.conf
+cat >>/opt/splunk/etc/deployment-apps/dm1_fw_app/local/inputs.conf<<EOF
+[monitor:///opt/log/.../access.log]
+host_segment = 3
+sourcetype = access_combined
+#index = testindex
+index = web
+
+[monitor:///opt/log/.../secure.log]
+host_segment = 3
+sourcetype = linux_secure
+#index = testindex
+index = main
+EOF
+
+#outputs.conf
+cat >>/opt/splunk/etc/deployment-apps/dm1_fw_app/local/outputs.conf<<EOF
+[tcpout]
+defaultGroup = my_search_peers
+forwardedindex.filter.disable = true
+indexAndForward = false
+
+[tcpout:my_search_peers]
+server=10.23.23.5:9997,10.23.23.6:9997
+EOF
+```
+
+This `inputs.conf` will monitor the files `access.log` and `secure.log`, send them to different indexes and infer the hostname from the third segment of the
+file path. It also sets the sourcetype.
+
+The `outputs.conf` forwards the data in a loadbalanced fashion to the two indexers.
+
+Once this is done, trigger the deployment with `splunk reload deploy-server` on the search head. This will push the config to `datamill1`
+and reload the splunk daemon. It might a take a while - you can reload splunk on `datamill1` for faster results.
+
+Also, if still onboarding data, you can use the testindex first, and then switch once everything works as expected.

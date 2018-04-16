@@ -55,6 +55,13 @@ thawedPath = /opt/frozen/web
 maxTotalDataSizeMB = 1000
 maxDataSize = 100
 
+[testindex]
+disabled = 0
+homePath = \$SPLUNK_DB/\$_index_name/db
+coldPath = \$SPLUNK_DB/\$_index_name/colddb
+maxTotalDataSizeMB = 1000
+maxDataSize = 100
+
 EOF
 ```
 
@@ -65,6 +72,9 @@ chown splunk:splunk /opt/frozen
 ```
 
 Then, as user splunk, restart splunk.
+
+Note the `testindex` is not absolutly needed, however it is helpfull for dataonboarding. Data will first be sent to the `testindex` and 
+can be verified there. Once its clean, it can be sent to a different index.
 
 ## Listen for tcp input
 Make your indexer listen for tcp input on port 9997. On the indexers, in `etc/system/local/inputs.conf`, add the following two lines:
