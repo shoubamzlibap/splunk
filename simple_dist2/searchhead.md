@@ -73,3 +73,21 @@ The `<searchhead_name>` is the search head's serverName, specified in `server.co
 
 Restart each search peer. 
 
+# Knowledge Objects
+
+## Create field extractions
+For the `access_combined` sourcetype, create a `status` field using the web UIs field extractor. Make sure that the extractions permissions are at least "This App only", and give read access to 
+everyone.
+
+Also, extract `src_ip` and `user` from the `linux_secure` log. This can be done with the field extractor. For reference, here is my
+`etc/apps/search/local/props.conf`:
+```
+[access_combined]
+EXTRACT-status = ^(?:[^ \n]* ){10}(?P<status>\d+)
+EXTRACT-referer_domain = ^(?:[^/\n]*/){5}(?P<referer_domain>\w+\.\w+\.\w+/)
+
+[linux_secure]
+EXTRACT-src_ip = ^.*\s(?P<src_ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}).*
+EXTRACT-user = ^.*(for\suser|publickey\sfor)\s(?P<user>\w+).*
+```
+These are probably not the most efficient or robust regexes, but they worked for me.

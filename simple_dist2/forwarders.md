@@ -61,7 +61,7 @@ On the splunk web on the search head, go to "Settings", "Forwarder Management". 
 Under "Server Classes", create a new server class, e.g. called "web", and add the app "datamill1" and the server "datamill1" to the class.
 
 ### Forwarding web and secure logs
-In the `dm`_fw_app` directory, create a `local` subdirectory, with the following two files in it:
+In the `dm_fw_app` directory, create a `local` subdirectory, with the following two files in it:
 
 ```
 # inputs.conf
@@ -79,7 +79,7 @@ sourcetype = linux_secure
 index = main
 EOF
 
-#outputs.conf
+# outputs.conf
 cat >>/opt/splunk/etc/deployment-apps/dm1_fw_app/local/outputs.conf<<EOF
 [tcpout]
 defaultGroup = my_search_peers
